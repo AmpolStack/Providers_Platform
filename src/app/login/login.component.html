@@ -1,0 +1,29 @@
+<div class="container-log">
+    <div class="error-container" *ngIf="this.textError!=''">
+        <p>{{this.textError}}</p>
+    </div>
+    <div class="disclamer">
+        <div class="rumble"></div>
+        <h2>PROVPLAT</h2>
+    </div>
+    <form [formGroup]="this.loginForm">
+        <fieldset>
+            <legend>Write to log in</legend>
+            <div class="mb-3">
+                <label for="disabledTextInput" class="form-label">Email</label>
+                <input type="text" id="disabledTextInput" class="form-control" placeholder="ej : 'example@gmail.com'" formControlName="email">
+                <p class="text-danger" *ngIf="this.hasErrors('email', 'required')">The email field is requiered</p>
+                <p class="text-danger" *ngIf="this.hasErrors('email', 'email')">You must enter a valid email address</p>
+            </div>
+            <div class="mb-3">
+                <label for="disabledTextInput" class="form-label">Password</label>
+                <input type="text" id="disabledTextInput" class="form-control" placeholder="write your password here..." formControlName="password">
+                <p class="text-danger" *ngIf="this.hasErrors('password', 'required')">The password field is requiered</p>
+            </div>
+            <div class="mb-3">
+        </div>
+            <button type="button" class="btn btn-primary" [disabled]="this.buttonInvalid" (click)="this.sendSoli()">SEND</button>
+        </fieldset>
+        <a routerLink="" class="link-primary">register</a>
+    </form>
+</div>

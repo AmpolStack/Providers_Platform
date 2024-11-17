@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+*{
+margin: 0;
+padding: 0;
+color: #666;
+}
+html body{
+    background-color: #fff;
+font-family: "Montserrat", sans-serif;
+
+}
+body .navbar-toggler{
+    background-color: #CDE4EB;
+}
+body .offcanvas-body{
+    background-color: #CDE4EB;
+}
+.container-all{
+    display: grid;
+    grid-template-areas: "header"
+    "main";
+    grid-template-rows: min-content 1fr;
+}

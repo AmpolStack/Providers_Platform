@@ -1,0 +1,25 @@
+header{
+    grid-area: header;
+}
+router-outlet{
+    grid-area: main;
+    background-color: red !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+header > .navbar{
+    background-color: #93D1D0;
+}
+header .navbar-toggler{
+    border: 3px solid #666;;
+}
+h1{
+    cursor: pointer;
+    color: #666;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+body .offcanvas-body{
+    background-color: #93D1D0 !important;
+}
