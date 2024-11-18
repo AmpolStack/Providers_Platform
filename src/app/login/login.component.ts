@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
 
   sendSoli(){
     this.http.logInWithCredentials({email: this.loginForm.get('email')?.value, password: this.loginForm.get('password')?.value}).subscribe({
-      next: (res) => this.router.navigate(['']),
+      next: (res) => console.log(res),
       error: (err) => this.textError = err['error']
     });
 
