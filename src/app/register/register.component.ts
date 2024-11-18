@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserApiService } from '../user-api.service';
 import { registerUser } from '../models/registerUser';
+import { Provider } from '../models/provider';
 
 @Component({
   selector: 'app-register',
@@ -74,7 +75,17 @@ export class RegisterComponent implements OnInit{
       this.errorMessage = 'The repeated password is not the same';
     }
     else{
-      this.sendRequest(this.convertToRegisterUser());
+      if(this.generalForm.get('UserType')?.value == 'provider'){
+        this.sendRequestUserProvider(this.convertToRegisterUser(), this.convertToProvider());
+        console.log('xd')
+      }
+      else if(this.generalForm.get('UserType')?.value == 'client'){
+        this.sendRequestJustUser(this.convertToRegisterUser());
+        console.log("xd2")
+      }
+      else{
+        console.log("xd3")
+      }
     }
   }
 
@@ -91,12 +102,36 @@ export class RegisterComponent implements OnInit{
     return registerUser;
   }
 
-  public sendRequest(user : registerUser){
+  public convertToProvider(){
+    let provider : Provider = {
+      ProviderId : 0,
+      UserId : 0,
+      Nit : this.generalForm.get('Nit')?.value,
+      EntityName : this.generalForm.get('EntityName')?.value,
+      AssociationPrefix : this.generalForm.get('Prefix')?.value,
+      Contacts : [],
+      Actives : [],
+      Activities : []
+    }
+    return provider;
+  }
+
+  sendRequestJustUser(user : registerUser){
     this.http.CreateUser(user).subscribe({
       next : (res) => console.log(res),
-      error : (err) => this.errorMessage = err['error']
-    });
+      error: (err) => this.errorMessage = err['error'],
+    })
   }
+
+  sendRequestUserProvider(user : registerUser , provider : Provider){
+    this.http.CreateUserAndAsingProvider(provider, user).subscribe({
+      next : (res) => console.log(res),
+      error : (err) => this.errorMessage = err['error']
+    })
+  }
+
+
+  
   // sendSoli(){
   //   this.http.logInWithCredentials({email: this.loginForm.get('email')?.value, password: this.loginForm.get('password')?.value}).subscribe({
   //     next: (res) => console.log(res),
